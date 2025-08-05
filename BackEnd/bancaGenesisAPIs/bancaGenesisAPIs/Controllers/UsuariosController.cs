@@ -68,7 +68,7 @@ namespace bancaGenesisAPIs.Controllers
 
             var token = GenerateJwtToken(usuario);
 
-            return Ok(new { token });
+            return Ok(new { token, usuario.id });
         }
 
         [HttpPost("register")]

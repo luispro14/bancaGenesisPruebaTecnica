@@ -24,10 +24,14 @@ namespace bancaGenesisAPIs.Controllers
             return Ok(cliente);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> ListarClientes()
+        [HttpGet("id")]
+        public async Task<IActionResult> ListarClientes(int id)
         {
-            var clientes = _context.Clientes.ToList();
+            var clientes = _context.Clientes.FindAsync(id);
+            if(clientes == null)
+            {
+                return NotFound();
+            }
             return Ok(clientes);
         }
     } 

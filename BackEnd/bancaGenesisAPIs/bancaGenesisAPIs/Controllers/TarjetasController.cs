@@ -1,6 +1,7 @@
 ﻿using bancaGenesisAPIs.Data;
 using bancaGenesisAPIs.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace bancaGenesisAPIs.Controllers
 {
@@ -25,10 +26,10 @@ namespace bancaGenesisAPIs.Controllers
             return Ok(tarjeta);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> ListarTarjetas()
+        [HttpGet("{id}")]
+        public async Task<IActionResult> ListarTarjetas(int id)
         {
-            var tarjetas = _context.Tarjetas.ToList();
+            var tarjetas = await _context.Tarjetas.Where(x => x.idCuenta == id).ToListAsync();
             return Ok(tarjetas);
         }
 
